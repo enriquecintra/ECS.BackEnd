@@ -31,6 +31,15 @@ namespace BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration =
+                    Configuration.GetConnectionString("Redis");
+                options.InstanceName = "BackEnd-Cache-";
+            });
+
+
             services.AddCors();
 
             services.AddControllers(options => {
@@ -102,8 +111,7 @@ namespace BackEnd
 
                 cfg.CreateMap<MongoDB.Entities.UserEntity, Models.User>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjectId)).ReverseMap();
                 cfg.CreateMap<MongoDB.Entities.TransactionEntity, Models.Transaction>()
-                            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjectId))
-                            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User))
+                            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjectId)).ReverseMap()
                             .ReverseMap();
             });
             var mapper = config.CreateMapper();
