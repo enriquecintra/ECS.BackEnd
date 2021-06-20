@@ -1,13 +1,9 @@
-# Teste Técnico BackEnd e FrontEnd
+# Teste Técnico BackEnd
 
 ### Pré-requisitos
-Baixar a solução e executar os dois projetos, tanto BackEnd quanto o FrontEnd.
+Baixar a solução no visual studio e executar.
 
-## Projeto BackEnd 
-Abrirá uma página swagger para testar diretamente as apis. Também é possível autenticar via Bearer na própria página swagger para utilização de algumas apis que necessecitam de autenticação.
-
-## Projeto BackEnd 
-Abrirá uma página em React para utilização das apis.
+Abrirá uma página swagger para testar diretamente as apis. Também é possível autenticar via Bearer na própria página swagger para poder ter acesso a algumas apis que necessitam de autenticação.
 
 ### Banco de Dados
 Hospedei um cluster no MongoDB Atlas para testar a aplicação, não e necessário modificar o appsetting.json.
