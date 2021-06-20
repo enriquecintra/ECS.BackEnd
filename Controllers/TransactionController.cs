@@ -83,15 +83,21 @@ namespace BackEnd.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
+            var model = await _service.Get(id);
+            if(model == null) return Ok(new { success = true });
+
             await _service.Delete(id);
+
+            AtualizaCache(model, true);
 
             return Ok(new { success = true });
         }
 
 
-        private void AtualizaCache(Transaction model)
+        private void AtualizaCache(Transaction model, bool delete = false)
         {
             var valor = model.Income - model.Outflow;
+            if (delete) valor *= -1;
             var valorBalance = _cache.GetString("Balance");
             if (valorBalance == null) {
                 valorBalance = valor.ToString();
