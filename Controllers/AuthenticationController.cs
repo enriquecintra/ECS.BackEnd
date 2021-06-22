@@ -44,7 +44,7 @@ namespace BackEnd.Controllers
         {
             var user = await _service.Get(model.Username, model.Password);
             if (user == null)
-                return NotFound(new { message = "Usuário ou senha inválidos" });
+                return NotFound(new { error = "Usuário ou senha inválidos" });
 
             var token = TokenService.GenerateToken(user);
             user.Password = "";
